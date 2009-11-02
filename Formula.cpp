@@ -31,3 +31,10 @@ ostream& operator<<(ostream& out, const Formula& f)
     out << f.formula;
     return out;
 }
+
+Formula& Formula::operator=(Formula f)
+{
+    formula = f.formula;
+    RPN = f.RPN;
+    return *this;
+}
