@@ -38,3 +38,16 @@ Formula& Formula::operator=(Formula f)
     RPN = f.RPN;
     return *this;
 }
+
+Formula::Formula(string str)
+{
+    Formula();
+    formula = str;
+    convertRPN();
+}
+
+Formula::Formula(Formula f)
+{
+    Formula();
+    *this = f;
+}
