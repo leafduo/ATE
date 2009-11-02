@@ -3,10 +3,10 @@ inline bool Formula::empty() const
     return formula.empty();
 }
 
-inline bool Formula::isRPN() const
+/*inline bool Formula::isRPN() const
 {
     return !RPN.empty();
-}
+}*/
 
 static inline bool Forluma::assignment()
 {

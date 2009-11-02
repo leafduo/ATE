@@ -9,7 +9,7 @@
 class Formula
 {
     private:
-        inline bool isRPN() const;
+        //inline bool isRPN() const;
         inline bool empty() const;
         bool convertRPN();
         static inline bool assignment();
