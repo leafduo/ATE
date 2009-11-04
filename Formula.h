@@ -19,7 +19,7 @@ class Formula
         static const unsigned maxVar = 67108863u;
         std::string formula;
         std::list<char> RPN;
-        std::list::iterator<char> PRNPointer;
+        std::list<char>::iterator PRNPointer;
     public:
         Formula();
         ~Formula();
