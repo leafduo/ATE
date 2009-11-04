@@ -13,10 +13,10 @@ int main(int argc, const char* const argv[])
     cin >> f1;
     cout << "f2:";
     cin >> f2;
-    } /*else {
+    } else {
         f1 = argv[1];
-        f2 = argc[2];
-    }*/
+        f2 = argv[2];
+    }
     if (f1 == f2)
         cout << "equivalent" << endl;
     else

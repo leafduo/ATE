@@ -47,6 +47,12 @@ Formula& Formula::operator=(const Formula& f)
     return *this;
 }
 
+Formula& Formula::operator=(const char str[])
+{
+    formula = str;
+    return *this;
+}
+
 bool Formula::operator==(const Formula& f) const
 {
     return true;

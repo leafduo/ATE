@@ -26,6 +26,7 @@ class Formula
         Formula(const Formula& f);
         bool operator==(const Formula& f) const;
         Formula& operator=(const Formula& f);
+        Formula& operator=(const char str[]);
         friend std::istream& operator>>(std::istream& in, Formula& f);
         friend std::ostream& operator<<(std::ostream& out, const Formula& f);
 };
