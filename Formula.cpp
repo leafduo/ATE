@@ -1,3 +1,5 @@
+#include "Formula.h"
+
 inline bool Formula::empty() const
 {
     return formula.empty();
@@ -8,7 +10,13 @@ inline bool Formula::empty() const
     return !RPN.empty();
 }*/
 
-static inline bool Forluma::assignment()
+bool Formula::convertRPN()
+{
+    //std::stack<char> op;
+    return true;
+}
+
+inline bool Formula::assignment()
 {
     if (var <= maxVar) {
         ++var;
@@ -17,36 +25,47 @@ static inline bool Forluma::assignment()
         return false;
 }
 
-istream& operator>>(istream& in, Formula& f)
+std::istream& operator>>(std::istream& in, Formula& f)
 {
-    string str;
+    std::string str;
     in >> str;
     f.formula = str;
     f.convertRPN();
     return in;
 }
 
-ostream& operator<<(ostream& out, const Formula& f)
+std::ostream& operator<<(std::ostream& out, const Formula& f)
 {
     out << f.formula;
     return out;
 }
 
-Formula& Formula::operator=(Formula f)
+Formula& Formula::operator=(const Formula& f)
 {
     formula = f.formula;
     RPN = f.RPN;
     return *this;
 }
 
-Formula::Formula(string str)
+bool Formula::operator==(const Formula& f) const
+{
+    return true;
+}
+
+Formula::Formula(const std::string& str)
 {
     Formula();
     formula = str;
     convertRPN();
 }
 
-Formula::Formula(Formula f)
+Formula::Formula()
+{}
+
+Formula::~Formula()
+{}
+
+Formula::Formula(const Formula& f)
 {
     Formula();
     *this = f;
