@@ -1,1 +1,7 @@
-ate:Formula.cpp Formula.h ate.cpp
+CC = g++
+
+ate:Formula.o ate.o
+
+ate.o:ate.cpp
+
+Formula.o:Formula.cpp
