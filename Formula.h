@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <queue>
+#include <list>
 #include <istream>
 #include <ostream>
 
@@ -18,7 +18,8 @@ class Formula
         static unsigned var;
         static const unsigned maxVar = 67108863u;
         std::string formula;
-        std::queue<char, std::vector<char> > RPN;
+        std::list<char> RPN;
+        std::list::iterator<char> PRNPointer;
     public:
         Formula();
         ~Formula();
