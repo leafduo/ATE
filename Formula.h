@@ -17,7 +17,7 @@ class Formula
         inline bool isOperator(char ch) const;
         inline bool isOperand(char ch) const;
         static inline bool setVar();
-        static inline bool getVar();
+        static inline bool getVar(int i);
         static unsigned var;
         static const unsigned maxVar = 67108863u;
         std::string formula;

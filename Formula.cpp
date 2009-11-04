@@ -64,9 +64,9 @@ inline bool Formula::setVar:()
         return false;
 }
 
-inline bool Formula::getVar()
+inline bool Formula::getVar(int i)
 {
-    //TODO:get a single bit from var
+    return var & (1u << i);
 }
 
 std::istream& operator>>(std::istream& in, Formula& f)
