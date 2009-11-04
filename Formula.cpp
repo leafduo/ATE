@@ -55,7 +55,7 @@ void Formula::convertRPN()
         }
 }
 
-inline bool Formula::setVar:()
+inline bool Formula::setVar()
 {
     if (var <= maxVar) {
         ++var;
