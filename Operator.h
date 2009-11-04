@@ -1,7 +1,9 @@
 #ifndef OPERATOR_H
 #define OPERATOR_H
 
-class Operator
+#include "Op.h"
+
+class Operator : public Op
 {
     private:
         enum ENUM_OPERATOR

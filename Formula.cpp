@@ -1,4 +1,9 @@
 #include "Formula.h"
+#include "Operator.h"
+#include "Operand.h"
+
+#include <vector>
+#include <cctype>
 
 inline bool Formula::empty() const
 {
@@ -10,9 +15,34 @@ inline bool Formula::empty() const
     return !RPN.empty();
 }*/
 
+inline bool Formula::isOperator(char ch) const
+{
+    if ('!' == ch || '&' == ch || '|' == ch || '-' == ch || '<' == ch)
+        return true;
+    else
+        return false;
+}
+
+inline bool Formula::isOperand(char ch) const
+{
+    if (isalpha(ch) || '0' == ch || '1' == ch)
+        return true;
+    else
+        return false;
+}
+
 bool Formula::convertRPN()
 {
-    //std::stack<char> op;
+    std::stack<Operator, std::vector<Operator> > op;
+    for (std::string::iterator it = formula.begin(); it != formula.end(); ++it) {
+        if (isOperand(*it)) {
+            Operand tmp(*it);
+            RPN.push_back(tmp);
+        } else if (isOperator(*it)) {
+        } else
+            assert(isspace(*it));
+
+
     return true;
 }
 
