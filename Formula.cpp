@@ -31,19 +31,28 @@ inline bool Formula::isOperand(char ch) const
         return false;
 }
 
-bool Formula::convertRPN()
+void Formula::convertRPN()
 {
     std::stack<Operator, std::vector<Operator> > op;
     for (std::string::iterator it = formula.begin(); it != formula.end(); ++it) {
         if (isOperand(*it)) {
-            Operand tmp(*it);
+            Op *tmp = new Operand(*it);
             RPN.push_back(tmp);
         } else if (isOperator(*it)) {
+            Op *tmp = new Operator(*it);
+            if (!op.empty() && op.top() > *tmp) {
+                Op *tmp2 = new Operator(op.top());
+                RPN.push_back(tmp2);
+                op.pop();
+            }
+            op.push(*tmp);
         } else
             assert(isspace(*it));
-
-
-    return true;
+        while (!op.empty()) {
+            Op *tmp = new Operator(op.top());
+            RPN.push_back(tmp);
+            op.pop();
+        }
 }
 
 inline bool Formula::setVar:()

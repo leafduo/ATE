@@ -20,6 +20,9 @@ class Operator : public Op
         inline bool operator==(const Operator& o) const;
         inline Operator& operator=(const Operator& o);
         inline Operator& operator=(char ch);
+        Operator();
+        Operator(char ch);
+        Operator(const Operator& o);
 };
 
 #endif

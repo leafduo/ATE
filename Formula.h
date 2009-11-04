@@ -13,7 +13,7 @@ class Formula
         //inline bool isRPN() const;
         inline bool empty() const;
         bool evaluation() const;
-        bool convertRPN();
+        void convertRPN();
         inline bool isOperator(char ch) const;
         inline bool isOperand(char ch) const;
         static inline bool setVar();

@@ -45,3 +45,11 @@ inline Operator& operator=(char ch)
     }
     return *this;
 }
+
+Operator::Operator()
+{}
+
+Operator::Operator(char ch)
+{
+   *this = ch;
+}
