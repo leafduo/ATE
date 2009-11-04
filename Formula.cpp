@@ -16,13 +16,18 @@ bool Formula::convertRPN()
     return true;
 }
 
-inline bool Formula::assignment()
+inline bool Formula::setVar:()
 {
     if (var <= maxVar) {
         ++var;
         return true;
     } else
         return false;
+}
+
+inline bool Formula::getVar()
+{
+    //TODO:get a single bit from var
 }
 
 std::istream& operator>>(std::istream& in, Formula& f)

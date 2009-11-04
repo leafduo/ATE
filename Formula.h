@@ -14,7 +14,8 @@ class Formula
         inline bool empty() const;
         bool evaluation() const;
         bool convertRPN();
-        static inline bool assignment();
+        static inline bool setVar();
+        static inline bool getVar();
         static unsigned var;
         static const unsigned maxVar = 67108863u;
         std::string formula;

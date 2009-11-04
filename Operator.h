@@ -1,25 +1,23 @@
 #ifndef OPERATOR_H
 #define OPERATOR_H
 
-enum ENUM_OPERATOR
-{
-    XNOR,
-    IMPLICATION,
-    OR,
-    AND,
-    NOT
-};
-
 class Operator
 {
     private:
-        ENUM_OPERATOR data;
+        enum ENUM_OPERATOR
+        {
+            XNOR,
+            IMPLICATION,
+            OR,
+            AND,
+            NOT
+        } data;
     public:
-        bool operator>(const Operator& o) const;
-        bool operator<(const Operator& o) const;
-        bool operator==(const Operator& o) const;
-        Operator& operator=(Operator& o);
-        Operator& operator=(char ch);
+        inline bool operator>(const Operator& o) const;
+        inline bool operator<(const Operator& o) const;
+        inline bool operator==(const Operator& o) const;
+        inline Operator& operator=(const Operator& o);
+        inline Operator& operator=(char ch);
 };
 
 #endif
