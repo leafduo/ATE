@@ -3,6 +3,7 @@
 #include "Operand.h"
 
 #include <vector>
+#include <algorithm>
 #include <cctype>
 
 inline bool Formula::empty() const
@@ -73,6 +74,7 @@ std::istream& operator>>(std::istream& in, Formula& f)
 {
     std::string str;
     in >> str;
+    for_each(str.begin(), str.end(), std::tolower); 
     f.formula = str;
     f.convertRPN();
     return in;
@@ -99,6 +101,16 @@ Formula& Formula::operator=(const char str[])
 
 bool Formula::operator==(const Formula& f) const
 {
+    var = 0;
+    for (;setVar;)
+        if (f.evalution() != evalution())
+            return false;
+    return true;
+}
+
+bool Formula::evalution() const
+{
+    //TODO
     return true;
 }
 
