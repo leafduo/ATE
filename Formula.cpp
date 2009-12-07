@@ -1,10 +1,11 @@
 #include "Formula.h"
 #include "Operator.h"
-#include "Operand.h"
 
 #include <vector>
 #include <algorithm>
 #include <cctype>
+#include <stack>
+#include <cassert>
 
 inline bool Formula::empty() const
 {
@@ -37,23 +38,24 @@ void Formula::convertRPN()
     std::stack<Operator, std::vector<Operator> > op;
     for (std::string::iterator it = formula.begin(); it != formula.end(); ++it) {
         if (isOperand(*it)) {
-            Op *tmp = new Operand(*it);
-            RPN.push_back(tmp);
+            RPN+=*it;
         } else if (isOperator(*it)) {
-            Op *tmp = new Operator(*it);
-            if (!op.empty() && op.top() > *tmp) {
-                Op *tmp2 = new Operator(op.top());
-                RPN.push_back(tmp2);
+            Operator tmp(*it);
+            if (!op.empty() && op.top() > tmp) {
+                RPN+=op.top();
                 op.pop();
             }
-            op.push(*tmp);
+            op.push(tmp);
+            if('-' == *it)
+                ++it;   //TODO:error handling 
         } else
             assert(isspace(*it));
         while (!op.empty()) {
-            Op *tmp = new Operator(op.top());
-            RPN.push_back(tmp);
+            RPN+=op.top();
             op.pop();
         }
+        RPN+=" ";
+    }
 }
 
 inline bool Formula::setVar()
@@ -74,7 +76,7 @@ std::istream& operator>>(std::istream& in, Formula& f)
 {
     std::string str;
     in >> str;
-    for_each(str.begin(), str.end(), std::tolower); 
+    for_each(str.begin(), str.end(), tolower); 
     f.formula = str;
     f.convertRPN();
     return in;
@@ -103,14 +105,13 @@ bool Formula::operator==(const Formula& f) const
 {
     var = 0;
     for (;setVar;)
-        if (f.evalution() != evalution())
+        if (f.evaluate() != evaluate())
             return false;
     return true;
 }
 
-bool Formula::evalution() const
+bool Formula::evaluate() const
 {
-    //TODO
     return true;
 }
 

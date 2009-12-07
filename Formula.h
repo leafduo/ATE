@@ -12,7 +12,7 @@ class Formula
     private:
         //inline bool isRPN() const;
         inline bool empty() const;
-        bool evaluation() const;
+        bool evaluate() const;
         void convertRPN();
         inline bool isOperator(char ch) const;
         inline bool isOperand(char ch) const;
@@ -20,9 +20,9 @@ class Formula
         static inline bool getVar(int i);
         static unsigned var;
         static const unsigned maxVar = 67108863u;
+        void tolower(char& ch);
         std::string formula;
-        std::list<Op*> RPN;
-        std::list<Op*>::iterator PRNPointer;
+        std::string RPN;
     public:
         Formula();
         ~Formula();
