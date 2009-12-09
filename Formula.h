@@ -35,4 +35,44 @@ class Formula
         friend std::ostream& operator<<(std::ostream& out, const Formula& f);
 };
 
+inline bool Formula::empty() const
+{
+    return formula.empty();
+}
+
+/*inline bool Formula::isRPN() const
+{
+    return !RPN.empty();
+}*/
+
+inline bool Formula::isOperator(char ch) const
+{
+    if ('!' == ch || '&' == ch || '|' == ch || '-' == ch || '<' == ch)
+        return true;
+    else
+        return false;
+}
+
+inline bool Formula::isOperand(char ch) const
+{
+    if (isalpha(ch) || '0' == ch || '1' == ch)
+        return true;
+    else
+        return false;
+}
+
+inline bool Formula::setVar()
+{
+    if (Formula::var <= maxVar) {
+        ++var;
+        return true;
+    } else
+        return false;
+}
+
+inline bool Formula::getVar(int i)
+{
+    return var & (1u << i);
+}
+
 #endif
