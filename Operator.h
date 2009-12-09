@@ -23,9 +23,9 @@ class Operator
         inline bool operator==(const Operator& o) const;
         inline Operator& operator=(const Operator& o);
         inline Operator& operator=(char ch);
-        Operator();
-        Operator(char ch);
-        Operator(const Operator& o);
+        inline Operator();
+        inline Operator(char ch);
+        inline Operator(const Operator& o);
         inline friend std::string& operator+=(std::string & str, const Operator & op);
 };
 
@@ -96,5 +96,9 @@ inline std::string& operator+=(std::string & str, const Operator & op)
         assert(false);
 }
 
+Operator::Operator(char ch)
+{
+   *this = ch;
+}
 
 #endif
