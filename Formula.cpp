@@ -22,7 +22,7 @@ void Formula::convertRPN()
             op.push(tmp);
             if('-' == *it)
                 ++it;   //TODO:error handling 
-        } else
+        } else if('(' == *it)
             assert(isspace(*it));
         while (!op.empty()) {
             RPN+=op.top();

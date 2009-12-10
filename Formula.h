@@ -41,9 +41,9 @@ inline bool Formula::empty() const
 }
 
 /*inline bool Formula::isRPN() const
-{
-    return !RPN.empty();
-}*/
+  {
+  return !RPN.empty();
+  }*/
 
 inline bool Formula::isOperator(char ch) const
 {

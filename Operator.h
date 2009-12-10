@@ -10,7 +10,8 @@ enum ENUM_OPERATOR
     IMPLICATION,
     OR,
     AND,
-    NOT
+    NOT,
+    PARE
 };
 
 class Operator
@@ -76,6 +77,9 @@ inline Operator& Operator::operator=(char ch)
         case '<':
             data = XNOR;
             break;
+        case '(':
+            data = PARE;
+            break;
     }
     return *this;
 }
@@ -92,6 +96,8 @@ inline std::string& operator+=(std::string & str, const Operator & op)
         return str += '&';
     else if (NOT == op.data)
         return str += '!';
+    else if (PARE == op.data)
+        return str += '(';
     else
         assert(false);
 }
