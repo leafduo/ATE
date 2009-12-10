@@ -26,7 +26,8 @@ void Formula::convertRPN()
             Operator tmp(*it);
             op.push(tmp);
         } else if (')' == *it) { //TODO:error handling
-            while('(' != op.top()) {
+            Operator pare('(');
+            while(pare != op.top()) {
                 RPN += op.top();
                 op.pop();
             }

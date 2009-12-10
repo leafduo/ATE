@@ -22,6 +22,7 @@ class Operator
         inline bool operator>(const Operator& o) const;
         inline bool operator<(const Operator& o) const;
         inline bool operator==(const Operator& o) const;
+        inline bool operator!=(const Operator& o) const;
         inline Operator& operator=(const Operator& o);
         inline Operator& operator=(char ch);
         inline Operator();
@@ -48,6 +49,11 @@ inline bool Operator::operator<(const Operator& o) const
 inline bool Operator::operator==(const Operator& o) const
 {
     return data == o.data;
+}
+
+inline bool Operator::operator!=(const Operator& o) const
+{
+    return data != o.data;
 }
 
 inline Operator& Operator::operator=(const Operator& o)
