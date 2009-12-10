@@ -13,4 +13,4 @@ Formula.o:Formula.cpp
 Operator.o:Operator.cpp
 
 clean:
-	rm *.o
+	rm *.o ate
