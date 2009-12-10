@@ -12,20 +12,29 @@ void Formula::convertRPN()
     std::stack<Operator, std::vector<Operator> > op;
     for (std::string::iterator it = formula.begin(); it != formula.end(); ++it) {
         if (isOperand(*it)) {
-            RPN+=*it;
+            RPN += *it;
         } else if (isOperator(*it)) {
             Operator tmp(*it);
             if (!op.empty() && op.top() > tmp) {
-                RPN+=op.top();
+                RPN += op.top();
                 op.pop();
             }
             op.push(tmp);
             if('-' == *it)
                 ++it;   //TODO:error handling 
-        } else if('(' == *it)
+        } else if ('(' == *it) {
+            Operator tmp(*it);
+            op.push(tmp);
+        } else if (')' == *it) { //TODO:error handling
+            while('(' != op.top()) {
+                RPN += op.top();
+                op.pop();
+            }
+            op.pop();
+        } else
             assert(isspace(*it));
         while (!op.empty()) {
-            RPN+=op.top();
+            RPN += op.top();
             op.pop();
         }
         RPN+=" ";
