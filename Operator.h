@@ -68,7 +68,7 @@ inline Operator& Operator::operator=(char ch)
         default:
             assert(false);
             break;
-        case '!':
+        case '^':
             data = NOT;
             break;
         case '&':
@@ -101,7 +101,7 @@ inline std::string& operator+=(std::string & str, const Operator & op)
     else if (AND == op.data)
         return str += '&';
     else if (NOT == op.data)
-        return str += '!';
+        return str += '^';
     else if (PARE == op.data)
         return str += '(';
     else
