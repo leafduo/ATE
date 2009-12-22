@@ -1,6 +1,6 @@
 CC = g++
 
-CXXFLAGS = -g
+CXXFLAGS = -g -D DEBUG
 
 all:compile
 
@@ -15,4 +15,4 @@ Formula.o:Formula.cpp Operator.h
 Operator.o:Operator.cpp
 
 clean:
-	rm *.o ate
+	rm *.o ate *~

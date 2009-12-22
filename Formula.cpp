@@ -7,6 +7,10 @@
 #include <stack>
 #include <cassert>
 
+#ifdef DEBUG
+#include <iostream>
+#endif
+
 void Formula::convertRPN()
 {
     std::stack<Operator, std::vector<Operator> > op;
@@ -34,12 +38,13 @@ void Formula::convertRPN()
             op.pop();
         } else
             assert(isspace(*it));
-        while (!op.empty()) {
-            RPN += op.top();
-            op.pop();
-        }
         RPN+=" ";
     }
+    while (!op.empty()) {
+        RPN += op.top();
+        op.pop();
+    }
+
 }
 
 std::istream& operator>>(std::istream& in, Formula& f)
@@ -49,6 +54,9 @@ std::istream& operator>>(std::istream& in, Formula& f)
     for_each(str.begin(), str.end(), tolower); 
     f.formula = str;
     f.convertRPN();
+#ifdef DEBUG
+    std::cout<<f.RPN<<std::endl;
+#endif
     return in;
 }
 
