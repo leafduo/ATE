@@ -38,13 +38,14 @@ void Formula::convertRPN()
             op.pop();
         } else
             assert(isspace(*it));
-        RPN+=" ";
+        RPN += " ";
 #ifdef DEBUG
         std::cout<<RPN<<std::endl;
 #endif
     }
     while (!op.empty()) {
         RPN += op.top();
+        RPN += " ";
         op.pop();
     }
 
