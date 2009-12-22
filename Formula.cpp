@@ -39,6 +39,9 @@ void Formula::convertRPN()
         } else
             assert(isspace(*it));
         RPN+=" ";
+#ifdef DEBUG
+        std::cout<<RPN<<std::endl;
+#endif
     }
     while (!op.empty()) {
         RPN += op.top();

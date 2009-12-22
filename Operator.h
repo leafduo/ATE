@@ -4,14 +4,18 @@
 #include <string>
 #include <cassert>
 
+#ifdef DEBUG
+#include <iostream>
+#endif
+
 enum ENUM_OPERATOR
 {
+    PARE,
     XNOR,
     IMPLICATION,
     OR,
     AND,
     NOT,
-    PARE
 };
 
 class Operator
@@ -104,8 +108,13 @@ inline std::string& operator+=(std::string & str, const Operator & op)
         return str += '^';
     else if (PARE == op.data)
         return str += '(';
-    else
+    else {
+#ifdef DEBUG
+        std::string tmp(""); 
+        std::cout << op.data << std::endl;
+#endif
         assert(false);
+    }
 }
 
 Operator::Operator(char ch)
