@@ -51,13 +51,15 @@ void Formula::convertRPN()
 
 }
 
-void Formula::initVar()
+void Formula::initVar()   //form a sorted varible name vector
 {
-    for(std::string::iterator it = formula.begin(); it != formula.end(); ++i) {
+    for(std::string::iterator it = formula.begin(); it != formula.end(); ++it)
         if(std::isalpha(*it))
             variable.push_back(*it);
     std::sort(variable.begin(), variable.end());
-    std::string::iterator newEnd = std::unquie(variable.begin(), variable.end());
+    std::vector<char>::iterator newEnd = std::unique(variable.begin(), variable.end());
+    variable.erase(newEnd, variable.end());
+}
     
 
 std::istream& operator>>(std::istream& in, Formula& f)
@@ -128,3 +130,4 @@ Formula::Formula(const Formula& f)
 }
 
 unsigned Formula::var = 0;
+unsigned Formula::maxVar = 0; //FIXME:should be deleted

@@ -18,11 +18,12 @@ class Formula
         inline bool isOperand(char ch) const;
         static inline bool setVar();
         static inline bool getVar(int i);
-        static void initVar();
+        void initVar();
         static unsigned var;
         static unsigned maxVar;
-        static vector<char> variable;
-        static vector<char> value;
+        unsigned privateMaxVar;
+        std::vector<char> variable;
+        std::vector<char> value;
         void tolower(char& ch);
         std::string formula;
         std::string RPN;
@@ -66,7 +67,7 @@ inline bool Formula::isOperand(char ch) const
 
 inline bool Formula::setVar()
 {
-    if (Formula::var <= maxVar) {
+    if (var <= maxVar) {
         ++var;
         return true;
     } else
