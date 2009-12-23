@@ -51,6 +51,15 @@ void Formula::convertRPN()
 
 }
 
+void Formula::initVar()
+{
+    for(std::string::iterator it = formula.begin(); it != formula.end(); ++i) {
+        if(std::isalpha(*it))
+            variable.push_back(*it);
+    std::sort(variable.begin(), variable.end());
+    std::string::iterator newEnd = std::unquie(variable.begin(), variable.end());
+    
+
 std::istream& operator>>(std::istream& in, Formula& f)
 {
     std::string str;

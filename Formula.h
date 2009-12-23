@@ -18,8 +18,11 @@ class Formula
         inline bool isOperand(char ch) const;
         static inline bool setVar();
         static inline bool getVar(int i);
+        static void initVar();
         static unsigned var;
-        static const unsigned maxVar = 67108863u;
+        static unsigned maxVar;
+        static vector<char> variable;
+        static vector<char> value;
         void tolower(char& ch);
         std::string formula;
         std::string RPN;
