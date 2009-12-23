@@ -48,7 +48,8 @@ void Formula::convertRPN()
         RPN += " ";
         op.pop();
     }
-
+    //TODO:move to another place
+    initVar();
 }
 
 void Formula::initVar()   //form a sorted varible name vector
@@ -101,6 +102,12 @@ bool Formula::operator==(const Formula& f) const
         if (f.evaluate() != evaluate())
             return false;
     return true;
+}
+
+void Formula::initMaxVar(Formula f)
+{
+    unsigned length = std::max(variable.size(), f.variable.size());
+    Formula::maxVar = ~(~0uL>>length<<length); //form maxVar
 }
 
 bool Formula::evaluate() const

@@ -19,9 +19,9 @@ class Formula
         static inline bool setVar();
         static inline bool getVar(int i);
         void initVar();
+        void initMaxVar(Formula f);
         static unsigned var;
         static unsigned maxVar;
-        unsigned privateMaxVar;
         std::vector<char> variable;
         std::vector<char> value;
         void tolower(char& ch);
