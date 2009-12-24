@@ -102,6 +102,7 @@ Formula& Formula::operator=(const char str[])
 
 bool Formula::operator==(const Formula& f) const
 {
+    initMaxVar(f);
     var = 0;
     for (;setVar;)
         if (f.evaluate() != evaluate())
@@ -109,13 +110,16 @@ bool Formula::operator==(const Formula& f) const
     return true;
 }
 
-void Formula::initMaxVar(Formula f)
+void Formula::initMaxVar(const Formula f) const
 {
     std::merge(privateVariable.begin(), privateVariable.end(), f.privateVariable.begin(), f.privateVariable.end(), back_inserter(Formula::variable));
     std::vector<char>::iterator newEnd = std::unique(Formula::variable.begin(), Formula::variable.end());
     Formula::variable.erase(newEnd, variable.end());
     unsigned length = Formula::variable.size();
     Formula::maxVar = ~(~0uL>>length<<length); //form maxVar
+#ifdef DEBUG
+    std::cout << Formula::maxVar << std::endl;
+#endif
 }
 
 bool Formula::evaluate() const
