@@ -39,27 +39,29 @@ void Formula::convertRPN()
         } else
             assert(isspace(*it));
         RPN += " ";
-#ifdef DEBUG
-        std::cout<<RPN<<std::endl;
-#endif
-    }
+   }
     while (!op.empty()) {
         RPN += op.top();
         RPN += " ";
         op.pop();
-    }
+   }
     //TODO:move to another place
     initVar();
+#ifdef DEBUG
+    for(std::vector<char>::iterator it = privateVariable.begin(); it != privateVariable.end(); ++it)
+        std::cout << *it;
+    std::cout << std::endl;
+#endif
 }
 
 void Formula::initVar()   //form a sorted varible name vector
 {
     for(std::string::iterator it = formula.begin(); it != formula.end(); ++it)
         if(std::isalpha(*it))
-            variable.push_back(*it);
-    std::sort(variable.begin(), variable.end());
-    std::vector<char>::iterator newEnd = std::unique(variable.begin(), variable.end());
-    variable.erase(newEnd, variable.end());
+            privateVariable.push_back(*it);
+    std::sort(privateVariable.begin(), privateVariable.end());
+    std::vector<char>::iterator newEnd = std::unique(privateVariable.begin(), privateVariable.end());
+    privateVariable.erase(newEnd, privateVariable.end());
 }
     
 
@@ -106,7 +108,10 @@ bool Formula::operator==(const Formula& f) const
 
 void Formula::initMaxVar(Formula f)
 {
-    unsigned length = std::max(variable.size(), f.variable.size());
+    std::merge(privateVariable.begin(), privateVariable.end(), f.privateVariable.begin(), f.privateVariable.end(), back_inserter(Formula::variable));
+    std::vector<char>::iterator newEnd = std::unique(Formula::variable.begin(), Formula::variable.end());
+    Formula::variable.erase(newEnd, variable.end());
+    unsigned length = Formula::variable.size();
     Formula::maxVar = ~(~0uL>>length<<length); //form maxVar
 }
 
@@ -136,5 +141,7 @@ Formula::Formula(const Formula& f)
     *this = f;
 }
 
-unsigned Formula::var = 0;
-unsigned Formula::maxVar = 0; //FIXME:should be deleted
+unsigned Formula::var;
+unsigned Formula::maxVar;
+std::vector<char> Formula::variable;
+std::vector<char> Formula::value;

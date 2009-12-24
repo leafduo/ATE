@@ -22,8 +22,9 @@ class Formula
         void initMaxVar(Formula f);
         static unsigned var;
         static unsigned maxVar;
-        std::vector<char> variable;
-        std::vector<char> value;
+        std::vector<char> privateVariable;
+        static std::vector<char> variable;
+        static std::vector<char> value;
         void tolower(char& ch);
         std::string formula;
         std::string RPN;
