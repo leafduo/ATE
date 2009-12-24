@@ -103,10 +103,11 @@ Formula& Formula::operator=(const char str[])
 bool Formula::operator==(const Formula& f) const
 {
     initMaxVar(f);
-    var = 0;
-    for (;setVar;)
+    for (var = 0; var != maxVar; ++var) {
+        setValue();
         if (f.evaluate() != evaluate())
             return false;
+    }
     return true;
 }
 

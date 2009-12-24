@@ -17,7 +17,7 @@ class Formula
         void convertRPN();
         inline bool isOperator(char ch) const;
         inline bool isOperand(char ch) const;
-        static inline bool setVar();
+        static inline bool setValue();
         static inline bool getVar(char ch);
         void initVar();
         void initMaxVar(const Formula f) const;
@@ -67,10 +67,8 @@ inline bool Formula::isOperand(char ch) const
         return false;
 }
 
-inline bool Formula::setVar()
+inline bool Formula::setValue()
 {
-    if (var <= maxVar)
-        ++var;
     std::bitset<26> tmp(var);
     value = tmp;
 }
