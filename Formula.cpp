@@ -69,12 +69,9 @@ std::istream& operator>>(std::istream& in, Formula& f)
 {
     std::string str;
     in >> str;
-    for_each(str.begin(), str.end(), tolower); 
+    std::for_each(str.begin(), str.end(), Formula::tolower); 
     f.formula = str;
     f.convertRPN();
-#ifdef DEBUG
-    std::cout<<f.RPN<<std::endl;
-#endif
     return in;
 }
 
@@ -87,13 +84,19 @@ std::ostream& operator<<(std::ostream& out, const Formula& f)
 Formula& Formula::operator=(const Formula& f)
 {
     formula = f.formula;
-    RPN = f.RPN;
+    convertRPN();
     return *this;
 }
 
 Formula& Formula::operator=(const char str[])
 {
+    /*int i;
+    for(i = 0; str[i] != 0; ++i)
+        ;
+    std::for_each(str, str + i, tolower); */
     formula = str;
+    std::for_each(formula.begin(), formula.end(), Formula::tolower);
+    convertRPN();
     return *this;
 }
 
@@ -139,6 +142,11 @@ Formula::Formula(const Formula& f)
 {
     Formula();
     *this = f;
+}
+
+void Formula::tolower(char& ch)
+{
+    ch = std::tolower(ch);
 }
 
 unsigned Formula::var = 0;

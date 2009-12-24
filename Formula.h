@@ -26,7 +26,7 @@ class Formula
         std::vector<char> privateVariable;
         static std::vector<char> variable;
         static std::bitset<26> value;
-        void tolower(char& ch);
+        static void tolower(char& ch);
         std::string formula;
         std::string RPN;
     public:
