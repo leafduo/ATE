@@ -39,12 +39,12 @@ void Formula::convertRPN()
         } else
             assert(isspace(*it));
         RPN += " ";
-   }
+    }
     while (!op.empty()) {
         RPN += op.top();
         RPN += " ";
         op.pop();
-   }
+    }
     //TODO:move to another place
     initVar();
 #ifdef DEBUG
@@ -63,7 +63,7 @@ void Formula::initVar()   //form a sorted varible name vector
     std::vector<char>::iterator newEnd = std::unique(privateVariable.begin(), privateVariable.end());
     privateVariable.erase(newEnd, privateVariable.end());
 }
-    
+
 
 std::istream& operator>>(std::istream& in, Formula& f)
 {
@@ -141,7 +141,7 @@ Formula::Formula(const Formula& f)
     *this = f;
 }
 
-unsigned Formula::var;
+unsigned Formula::var = 0;
 unsigned Formula::maxVar;
 std::vector<char> Formula::variable;
-std::vector<char> Formula::value;
+std::bitset<26> Formula::value;

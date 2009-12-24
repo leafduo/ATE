@@ -6,6 +6,7 @@
 #include <list>
 #include <istream>
 #include <ostream>
+#include <bitset>
 
 class Formula
 {
@@ -17,14 +18,14 @@ class Formula
         inline bool isOperator(char ch) const;
         inline bool isOperand(char ch) const;
         static inline bool setVar();
-        static inline bool getVar(int i);
+        static inline bool getVar(char ch);
         void initVar();
         void initMaxVar(Formula f);
         static unsigned var;
         static unsigned maxVar;
         std::vector<char> privateVariable;
         static std::vector<char> variable;
-        static std::vector<char> value;
+        static std::bitset<26> value;
         void tolower(char& ch);
         std::string formula;
         std::string RPN;
@@ -68,16 +69,16 @@ inline bool Formula::isOperand(char ch) const
 
 inline bool Formula::setVar()
 {
-    if (var <= maxVar) {
+    if (var <= maxVar)
         ++var;
-        return true;
-    } else
-        return false;
+    std::bitset<26> tmp(var);
+    value = tmp;
 }
 
-inline bool Formula::getVar(int i)
+inline bool Formula::getVar(char ch)
 {
-    return var & (1u << i);
+    std::vector<char>::iterator found = std::find(variable.begin(), variable.end(), ch);
+    return value[found - variable.begin()];
 }
 
 #endif
