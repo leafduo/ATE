@@ -38,13 +38,14 @@ void Formula::convertRPN()
             op.pop();
         } else
             assert(isspace(*it));
-        RPN += " ";
     }
     while (!op.empty()) {
         RPN += op.top();
-        RPN += " ";
         op.pop();
     }
+#ifdef DEBUG
+    std::cout << RPN << std::endl;
+#endif
     //TODO:move to another place
     initVar();
 #ifdef DEBUG
@@ -123,9 +124,32 @@ void Formula::initMaxVar(const Formula f) const
 #endif
 }
 
-bool Formula::evaluate() const
+bool Formula::evaluate(void) const
 {
-    return true;
+    std::string f = replace();
+    std::stack<std::vector<bool> > st;
+    for (std::string::iterator it = f.begin(); it != f.end(); ++it) {
+        if (isOperand(*it))
+            st.push(*it);
+        else {
+            Operator op(*it);
+            bool o1, o2;
+            o1 = st.top();
+            st.pop();
+            o2 = st.top();
+            st.pop();
+            st.push(op(o1, o2));
+        }
+    }
+    return st.top();
+}
+
+std::string Formula::replace(void) const
+{
+    std::string result;
+    for(std::vector<char>::iterator i = variable.begin(); i != variable.end(); ++i)
+        std::replace_copy(RPN.begin(), RPN.end(), back_inserter(result), *i, getVar(*i));
+    return result;
 }
 
 Formula::Formula(const std::string& str)

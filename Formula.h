@@ -18,7 +18,8 @@ class Formula
         inline bool isOperator(char ch) const;
         inline bool isOperand(char ch) const;
         static inline bool setValue();
-        static inline bool getVar(char ch);
+        static inline char getVar(char ch);
+        std::string replace() const;
         void initVar();
         void initMaxVar(const Formula f) const;
         static unsigned var;
@@ -73,10 +74,13 @@ inline bool Formula::setValue()
     value = tmp;
 }
 
-inline bool Formula::getVar(char ch)
+inline char Formula::getVar(char ch)
 {
     std::vector<char>::iterator found = std::find(variable.begin(), variable.end(), ch);
-    return value[found - variable.begin()];
+    if (value[found - variable.begin()])
+        return '1';
+    else
+        return '0';
 }
 
 #endif
