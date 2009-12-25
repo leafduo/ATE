@@ -127,10 +127,10 @@ void Formula::initMaxVar(const Formula f) const
 bool Formula::evaluate(void) const
 {
     std::string f = replace();
-    std::stack<std::vector<bool> > st;
+    std::stack<bool> st;
     for (std::string::iterator it = f.begin(); it != f.end(); ++it) {
         if (isOperand(*it))
-            st.push(*it);
+            st.push(bool(*it-'0'));
         else {
             Operator op(*it);
             bool o1, o2;
