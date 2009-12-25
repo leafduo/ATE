@@ -33,6 +33,8 @@ class Operator
         inline Operator(char ch);
         inline Operator(const Operator& o);
         inline friend std::string& operator+=(std::string & str, const Operator & op);
+        bool operator()(bool o1, bool o2) const;
+        bool operator()(bool o) const;
 };
 
 inline Operator::Operator(const Operator& o)
@@ -72,7 +74,7 @@ inline Operator& Operator::operator=(char ch)
         default:
             assert(false);
             break;
-        case '^':
+        case '!':
             data = NOT;
             break;
         case '&':
@@ -84,7 +86,7 @@ inline Operator& Operator::operator=(char ch)
         case '-':
             data = IMPLICATION;
             break;
-        case '<':
+        case '^':
             data = XNOR;
             break;
         case '(':
@@ -105,7 +107,7 @@ inline std::string& operator+=(std::string & str, const Operator & op)
     else if (AND == op.data)
         return str += '&';
     else if (NOT == op.data)
-        return str += '^';
+        return str += '!';
     else if (PARE == op.data)
         return str += '(';
     else {

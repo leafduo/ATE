@@ -54,7 +54,7 @@ inline bool Formula::empty() const
 
 inline bool Formula::isOperator(char ch) const
 {
-    if ('^' == ch || '&' == ch || '|' == ch || '-' == ch || '<' == ch)
+    if ('^' == ch || '&' == ch || '|' == ch || '-' == ch || '!' == ch)
         return true;
     else
         return false;
