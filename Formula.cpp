@@ -104,8 +104,14 @@ Formula& Formula::operator=(const char str[])
 bool Formula::operator==(const Formula& f) const
 {
     initMaxVar(f);
+#ifdef DEBUG
+    std::cout << "maxVar = " << maxVar << std::endl;
+#endif
     for (var = 0; var != maxVar; ++var) {
         setValue();
+#ifdef DEBUG
+        std::cout << "hit" << std::endl;
+#endif
         if (f.evaluate() != evaluate())
             return false;
     }
@@ -127,6 +133,9 @@ void Formula::initMaxVar(const Formula f) const
 bool Formula::evaluate(void) const
 {
     std::string f = replace();
+#ifdef DEBUG
+    std::cout << "f:" << f << std::endl;
+#endif
     std::stack<bool> st;
     for (std::string::iterator it = f.begin(); it != f.end(); ++it) {
         if (isOperand(*it))
@@ -138,9 +147,9 @@ bool Formula::evaluate(void) const
         } else {
             Operator op(*it);
             bool o1, o2;
-            o1 = st.top();
-            st.pop();
             o2 = st.top();
+            st.pop();
+            o1 = st.top();
             st.pop();
             st.push(op(o1, o2));
         }
@@ -150,9 +159,9 @@ bool Formula::evaluate(void) const
 
 std::string Formula::replace(void) const
 {
-    std::string result;
+    std::string result(RPN);
     for(std::vector<char>::iterator i = variable.begin(); i != variable.end(); ++i)
-        std::replace_copy(RPN.begin(), RPN.end(), back_inserter(result), *i, getVar(*i));
+        std::replace(result.begin(), result.end(), *i, getVar(*i));
     return result;
 }
 
