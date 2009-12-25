@@ -131,7 +131,11 @@ bool Formula::evaluate(void) const
     for (std::string::iterator it = f.begin(); it != f.end(); ++it) {
         if (isOperand(*it))
             st.push(bool(*it-'0'));
-        else {
+        else if('!' == *it) {
+            bool o = st.top();
+            st.pop();
+            st.push(!o);
+        } else {
             Operator op(*it);
             bool o1, o2;
             o1 = st.top();
