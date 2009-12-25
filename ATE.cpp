@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cassert>
 #include "Formula.h"
 
 using namespace std;
@@ -14,10 +15,11 @@ int main(int argc, const char* const argv[])
     cin >> f1;
     cout << "Formula 2:";
     cin >> f2;
-    } else {
+    } else if (3 == argc) {
         f1 = argv[1];
         f2 = argv[2];
-    }
+    } else
+        assert(false);
     if (f1 == f2)
         cout << "Yes, they are equivalent." << endl;
     else
