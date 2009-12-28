@@ -17,9 +17,9 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <cassert>
 
 #include "Operator.h"
+#include "Exception.h"
 
 bool Operator::operator()(bool o1, bool o2) const
 {
@@ -37,11 +37,12 @@ bool Operator::operator()(bool o1, bool o2) const
     else if (AND == data)
         return o1 && o2;
     else
-        assert(false);
+        Exception::exit();
 }
 
 bool Operator::operator()(bool o) const
 {
-    assert(NOT == data);
+    if (NOT != data)
+        Exception::exit();
     return !o;
 }

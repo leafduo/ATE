@@ -19,12 +19,12 @@
 
 #include "Formula.h"
 #include "Operator.h"
+#include "Exception.h"
 
 #include <vector>
 #include <algorithm>
 #include <cctype>
 #include <stack>
-#include <cassert>
 
 #ifdef DEBUG
 #include <iostream>
@@ -56,7 +56,8 @@ void Formula::convertRPN() //convert formula to Reverse Polish Notation
             }
             op.pop();
         } else
-            assert(isspace(*it));
+            if(!isspace(*it))
+                Exception::exit();
     }
     while (!op.empty()) {
         RPN += op.top();

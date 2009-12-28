@@ -20,8 +20,9 @@
 #ifndef OPERATOR_H
 #define OPERATOR_H
 
+#include "Exception.h"
+
 #include <string>
-#include <cassert>
 
 #ifdef DEBUG
 #include <iostream>
@@ -91,7 +92,7 @@ inline Operator& Operator::operator=(char ch)
 {
     switch(ch) {
         default:
-            assert(false);
+            Exception::exit();
             break;
         case '!':
             data = NOT;
@@ -134,7 +135,7 @@ inline std::string& operator+=(std::string & str, const Operator & op)
         std::string tmp(""); 
         std::cout << op.data << std::endl;
 #endif
-        assert(false);
+        Exception::exit();
     }
 }
 
