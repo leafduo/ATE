@@ -11,7 +11,7 @@
 #include <iostream>
 #endif
 
-void Formula::convertRPN()
+void Formula::convertRPN() //convert formula to Reverse Polish Notation
 {
     std::stack<Operator, std::vector<Operator> > op;
     for (std::string::iterator it = formula.begin(); it != formula.end(); ++it) {
@@ -69,7 +69,7 @@ void Formula::initVar()   //form a sorted varible name vector
 std::istream& operator>>(std::istream& in, Formula& f)
 {
     std::string str;
-    in >> str;
+    std::getline(in, str);
     std::for_each(str.begin(), str.end(), Formula::tolower); 
     f.formula = str;
     f.convertRPN();
@@ -130,7 +130,7 @@ void Formula::initMaxVar(const Formula f) const
 #endif
 }
 
-bool Formula::evaluate(void) const
+bool Formula::evaluate(void) const //evaluate a formula and return its value
 {
     std::string f = replace();
 #ifdef DEBUG
@@ -157,7 +157,7 @@ bool Formula::evaluate(void) const
     return st.top();
 }
 
-std::string Formula::replace(void) const
+std::string Formula::replace(void) const //replace variables by 0s or 1s
 {
     std::string result(RPN);
     for(std::vector<char>::iterator i = variable.begin(); i != variable.end(); ++i)
@@ -186,7 +186,7 @@ Formula::Formula(const Formula& f)
     *this = f;
 }
 
-void Formula::tolower(char& ch)
+void Formula::tolower(char& ch) //my own tolower() using reference
 {
     ch = std::tolower(ch);
 }
