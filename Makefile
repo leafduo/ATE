@@ -1,6 +1,6 @@
 CC = g++
 
-CXXFLAGS = -g -D DEBUG
+#CXXFLAGS = -g -D DEBUG
 
 all:compile
 
