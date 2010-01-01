@@ -44,7 +44,7 @@ void Formula::convertRPN() //convert formula to Reverse Polish Notation
             }
             op.push(tmp);
             if('-' == *it)
-                if('>' != ++it)
+                if('>' != *++it)
                     Exception::exit();
         } else if ('(' == *it) {
             Operator tmp(*it);
