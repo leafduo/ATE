@@ -10,3 +10,6 @@ ATE ── Are They Equivalent? 用来判断两个命题逻辑的公式是否等
 Mac OS X 10.6 (Leopard) GCC 4.2.1 GNU Make 3.81
 Debian GNU/Linux 4.0 kernel 2.6.31.5 GCC 4.1.2 GNU Make 3.81
 Windows Vista MinGW GCC 3.4.2 GNU Make 3.80
+
+在这里可以获得最新版本
+http://github.com/leafduo/ATE
