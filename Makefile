@@ -6,13 +6,13 @@ all:compile
 
 compile:ate
 
-ate:Formula.o Operator.o ate.o
+ate:formula.o operator.o ate.o
 
-ate.o:ate.cpp Formula.h
+ate.o:ate.cpp formula.h
 
-Formula.o:Formula.cpp Operator.h Formula.h Exception.h
+formula.o:formula.cpp operator.h formula.h exception.h
 
-Operator.o:Operator.cpp Operator.h Exception.h
+operator.o:operator.cpp operator.h exception.h
 
 clean:
 	rm *.o ate *~

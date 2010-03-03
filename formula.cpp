@@ -50,11 +50,17 @@ void Formula::convertRPN() //convert formula to Reverse Polish Notation
             } else if ('(' == *it) {
                 Operator tmp(*it);
                 op.push(tmp);
-            } else if (')' == *it) { //TODO:error handling
+            } else if (')' == *it) {
                 Operator pare('(');
-                while(pare != op.top()) {
-                    RPN += op.top();
-                    op.pop();
+                try {
+                    while(pare != op.top()) {
+                        RPN += op.top();
+                        op.pop();
+                        if(op.empty())
+                            throw formula_error("Invalid formula", formula);
+                    }
+                } catch (formula_error err) {
+                    err.process();
                 }
                 op.pop();
             } else
@@ -62,7 +68,7 @@ void Formula::convertRPN() //convert formula to Reverse Polish Notation
                     throw formula_error("Invalid formula", formula);
         }
     } catch (formula_error err) {
-        ;
+        err.process();
     }
     while (!op.empty()) {
         RPN += op.top();

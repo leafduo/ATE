@@ -93,7 +93,7 @@ inline Operator& Operator::operator=(char ch)
     try {
         switch(ch) {
             default:
-                throw formula_error("Invalid formula");
+                throw formula_error("Invalid formula! Illegal operators.");
                 break;
             case '!':
                 data = NOT;
@@ -115,7 +115,7 @@ inline Operator& Operator::operator=(char ch)
                 break;
         }
     } catch (formula_error err) {
-        ;
+        err.process();
     }
     return *this;
 }
@@ -136,9 +136,9 @@ inline std::string& operator+=(std::string & str, const Operator & op)
         else if (PARE == op.data)
             return str += '(';
         else
-            throw formula_error("Invalid formula");
+            throw formula_error("Invalid formula! Illegal operators.");
     } catch (formula_error err) {
-        ;
+        err.process();
     }
 }
 
