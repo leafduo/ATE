@@ -2,15 +2,26 @@
 #define EXCEPTION_H
 
 #include <iostream>
+#include <stdexcept>
+#include <string>
 
-class Exception
+class formula_error: public logic_error
 {
+    private:
+        std::string formula;
     public:
-        static void exit()
+        const string & show()
         {
-            std::cout << "Sorry, you have input an invalid formula, please verify the formula and run me again. If you think this is a bug of me, please send an e-mail to the author -- leafduo@gmail.com. Thanks." << std::endl;
-            std::exit(1);
+            return formula;
         }
+        explicit formula_error(const std::string& what_arg)
+            :logic_error(what_arg)
+        { }
+        explicit formula_error(const std::string& wath_arg, const std::string& f)
+            :logic_error(what_arg), formula(f)
+        { }
+        ~formula_error() throw()
+        { }
 };
 
 #endif
