@@ -38,7 +38,7 @@ bool Operator::operator()(bool o1, bool o2) const
         else if (AND == data)
             return o1 && o2;
         else
-            throw formula_error("Invalid formula! Illegal operators.");
+            throw formula_error("Invalid formula!");
     } catch (formula_error err) {
         err.process();
     }
@@ -48,7 +48,7 @@ bool Operator::operator()(bool o) const
 {
     try {
         if (NOT != data)
-            throw formula_error("Invalid formula! Illegal operators.");
+            throw formula_error("Invalid formula!");
     } catch (formula_error err) {
         err.process();
     }

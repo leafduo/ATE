@@ -46,7 +46,7 @@ void Formula::convertRPN() //convert formula to Reverse Polish Notation
                 op.push(tmp);
                 if('-' == *it)
                     if('>' != *++it)
-                        throw formula_error("Invalid formula", formula);
+                        throw formula_error("Invalid formula!", formula);
             } else if ('(' == *it) {
                 Operator tmp(*it);
                 op.push(tmp);
@@ -57,7 +57,7 @@ void Formula::convertRPN() //convert formula to Reverse Polish Notation
                         RPN += op.top();
                         op.pop();
                         if(op.empty())
-                            throw formula_error("Invalid formula", formula);
+                            throw formula_error("Invalid formula!", formula);
                     }
                 } catch (formula_error err) {
                     err.process();
@@ -65,7 +65,7 @@ void Formula::convertRPN() //convert formula to Reverse Polish Notation
                 op.pop();
             } else
                 if(!isspace(*it))
-                    throw formula_error("Invalid formula", formula);
+                    throw formula_error("Invalid formula!", formula);
         }
     } catch (formula_error err) {
         err.process();
