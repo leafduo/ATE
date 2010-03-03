@@ -17,9 +17,9 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "Formula.h"
-#include "Operator.h"
-#include "Exception.h"
+#include "formula.h"
+#include "operator.h"
+#include "exception.h"
 
 #include <vector>
 #include <algorithm>

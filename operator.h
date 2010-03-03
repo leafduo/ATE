@@ -20,7 +20,7 @@
 #ifndef OPERATOR_H
 #define OPERATOR_H
 
-#include "Exception.h"
+#include "exception.h"
 
 #include <string>
 

@@ -18,8 +18,8 @@
  */
 
 
-#include "Operator.h"
-#include "Exception.h"
+#include "operator.h"
+#include "exception.h"
 
 bool Operator::operator()(bool o1, bool o2) const
 {

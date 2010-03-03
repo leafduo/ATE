@@ -22,7 +22,7 @@
 #include <string>
 #include <stdexcept>
 
-#include "Formula.h"
+#include "formula.h"
 
 using namespace std;
 
