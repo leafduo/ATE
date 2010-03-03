@@ -1,21 +1,21 @@
 /*
-  ATE -- Are They Equivalent?
-  Copyright (C) 2009  leafduo.com
+   ATE -- Are They Equivalent?
+   Copyright (C) 2009  leafduo.com
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
 
 #include "Formula.h"
 #include "Operator.h"
@@ -33,32 +33,36 @@
 void Formula::convertRPN() //convert formula to Reverse Polish Notation
 {
     std::stack<Operator, std::vector<Operator> > op;
-    for (std::string::iterator it = formula.begin(); it != formula.end(); ++it) {
-        if (isOperand(*it)) {
-            RPN += *it;
-        } else if (isOperator(*it)) {
-            Operator tmp(*it);
-            if (!op.empty() && op.top() > tmp) {
-                RPN += op.top();
+    try {
+        for (std::string::iterator it = formula.begin(); it != formula.end(); ++it) {
+            if (isOperand(*it)) {
+                RPN += *it;
+            } else if (isOperator(*it)) {
+                Operator tmp(*it);
+                if (!op.empty() && op.top() > tmp) {
+                    RPN += op.top();
+                    op.pop();
+                }
+                op.push(tmp);
+                if('-' == *it)
+                    if('>' != *++it)
+                        throw formula_error("Invalid formula", formula);
+            } else if ('(' == *it) {
+                Operator tmp(*it);
+                op.push(tmp);
+            } else if (')' == *it) { //TODO:error handling
+                Operator pare('(');
+                while(pare != op.top()) {
+                    RPN += op.top();
+                    op.pop();
+                }
                 op.pop();
-            }
-            op.push(tmp);
-            if('-' == *it)
-                if('>' != *++it)
-                    Exception::exit();
-        } else if ('(' == *it) {
-            Operator tmp(*it);
-            op.push(tmp);
-        } else if (')' == *it) { //TODO:error handling
-            Operator pare('(');
-            while(pare != op.top()) {
-                RPN += op.top();
-                op.pop();
-            }
-            op.pop();
-        } else
-            if(!isspace(*it))
-                Exception::exit();
+            } else
+                if(!isspace(*it))
+                    throw formula_error("Invalid formula", formula);
+        }
+    } catch (formula_error err) {
+        ;
     }
     while (!op.empty()) {
         RPN += op.top();
@@ -113,9 +117,9 @@ Formula& Formula::operator=(const Formula& f)
 Formula& Formula::operator=(const char str[])
 {
     /*int i;
-    for(i = 0; str[i] != 0; ++i)
-        ;
-    std::for_each(str, str + i, tolower); */
+      for(i = 0; str[i] != 0; ++i)
+      ;
+      std::for_each(str, str + i, tolower); */
     formula = str;
     std::for_each(formula.begin(), formula.end(), Formula::tolower);
     convertRPN();
