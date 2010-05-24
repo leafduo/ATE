@@ -138,6 +138,8 @@ bool Formula::operator==(const Formula& f) const
 #ifdef DEBUG
     std::cout << "maxVar = " << maxVar << std::endl;
 #endif
+    if(!maxVar)
+        return (f.evaluate() == evaluate());
     for (var = 0; var != maxVar; ++var) {
         setValue();
 #ifdef DEBUG
